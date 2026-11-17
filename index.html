@@ -350,7 +350,7 @@ function renderOverview(){
  document.getElementById('overviewProgress').textContent=done+' / '+(pictures.length+scenarios.length*2);
  const x=scoreData();
  document.getElementById('overviewScore').textContent=x?x.total+'/100':'—';
- document.getElementById('overviewVerdict').textContent=x?moralityVerdict(x.total).label:'Complete all 26 decisions';
+ document.getElementById('overviewVerdict').textContent=x?moralityVerdict(x.total).label:'Complete all 22 decisions';
  document.getElementById('startBtn').textContent=x?'View your result':done?'Continue assessment':'Begin assessment';
 }
 function graphData(){const s=scoreData();let vals=[];if(s)vals.push({label:'Assessment',score:s.total});state.entries.forEach((e,i)=>vals.push({label:`Check-in ${i+1}`,score:e.rating}));return vals}

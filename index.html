@@ -203,7 +203,7 @@ const filmDialog=[
 ];
 
 function actor(x,y,coat,skin,id,role){
- return '<g class="person '+role+'" id="'+id+'" transform="translate('+x+' '+y+')">'+
+ return '<g transform="translate('+x+' '+y+')"><g class="person '+role+'" id="'+id+'">'+
  '<ellipse cx="0" cy="89" rx="34" ry="8" fill="#11231d" opacity=".29"/>'+
  '<g class="leg"><path d="M-12 41L-15 79M12 41L14 79" stroke="#35463e" stroke-width="13" stroke-linecap="round"/></g>'+
  '<path d="M-23 8Q-19-9 0-7Q23-9 25 9L20 46H-20Z" fill="'+coat+'"/>'+
@@ -213,7 +213,7 @@ function actor(x,y,coat,skin,id,role){
  '<g class="head"><ellipse cx="0" cy="-40" rx="20" ry="24" fill="'+skin+'"/>'+
  '<path d="M-20-41Q-25-67 0-68Q25-66 21-40Q10-53-1-50Q-11-44-20-41Z" fill="#2e302a"/>'+
  '<circle cx="-7" cy="-38" r="2" fill="#28312b"/><circle cx="7" cy="-38" r="2" fill="#28312b"/>'+
- '<path class="mouth" d="M-4 -27Q0 -25 4 -27"/></g></g>';
+ '<path class="mouth" d="M-4 -27Q0 -25 4 -27"/></g></g></g>';
 }
 function storyStage(i){
  const backgrounds=[
@@ -227,19 +227,19 @@ function storyStage(i){
  if(i===0){
   visual+=actor(250,350,'#a7775e','#b8826d','groupA','pressure-actor')+actor(360,348,'#456c56','#d09e80','groupB','lead')+
   actor(476,355,'#dbb889','#a97661','groupC','pressure-actor')+actor(765,354,'#628c7b','#bf977c','outsider','listener')+
-  '<g class="prop" transform="translate(414 258)"><rect x="-54" y="-22" width="108" height="44" rx="8" fill="#efe6d2"/><text x="0" y="6" fill="#4b705e" text-anchor="middle" font-size="20" font-weight="bold">PLANS</text></g>'+
+  '<g transform="translate(414 258)"><g class="prop"><rect x="-54" y="-22" width="108" height="44" rx="8" fill="#efe6d2"/><text x="0" y="6" fill="#4b705e" text-anchor="middle" font-size="20" font-weight="bold">PLANS</text></g></g>'+
   textBubble('A friend says','“We already made plans.”');
  }else if(i===1){
   visual+=actor(260,335,'#547b6f','#b9876f','owner','listener')+actor(738,337,'#b47a56','#d8a98a','colleague','pressure-actor lead')+
-  '<g class="prop" transform="translate(506 355)"><rect x="-100" y="-43" width="200" height="86" rx="8" fill="#f4ecd5" stroke="#d4c5a8" stroke-width="4"/><path d="M-75-16H70M-75 0H63M-75 16H35" stroke="#97aa99" stroke-width="6" stroke-linecap="round"/></g>'+
+  '<g transform="translate(506 355)"><g class="prop"><rect x="-100" y="-43" width="200" height="86" rx="8" fill="#f4ecd5" stroke="#d4c5a8" stroke-width="4"/><path d="M-75-16H70M-75 0H63M-75 16H35" stroke="#97aa99" stroke-width="6" stroke-linecap="round"/></g></g>'+
   textBubble('The organizer says','“Credit is up for grabs.”');
  }else if(i===2){
   visual+=actor(258,322,'#688e78','#c38e72','reviewer','lead')+actor(723,323,'#b48b69','#d0a486','chair','pressure-actor listener')+
-  '<g class="prop" transform="translate(488 373)"><rect x="-112" y="-31" width="100" height="70" rx="6" fill="#f3e9cb" stroke="#cabd9a" stroke-width="3"/><rect x="12" y="-31" width="100" height="70" rx="6" fill="#efe8d9" stroke="#c8bfa5" stroke-width="3"/><text x="-61" y="11" text-anchor="middle" font-size="22" fill="#466657">A</text><text x="61" y="11" text-anchor="middle" font-size="22" fill="#466657">B</text></g>'+
+  '<g transform="translate(488 373)"><g class="prop"><rect x="-112" y="-31" width="100" height="70" rx="6" fill="#f3e9cb" stroke="#cabd9a" stroke-width="3"/><rect x="12" y="-31" width="100" height="70" rx="6" fill="#efe8d9" stroke="#c8bfa5" stroke-width="3"/><text x="-61" y="11" text-anchor="middle" font-size="22" fill="#466657">A</text><text x="61" y="11" text-anchor="middle" font-size="22" fill="#466657">B</text></g></g>'+
   textBubble('The chair says','“We know candidate A.”');
  }else{
   visual+=actor(250,339,'#aa7659','#cd997c','boss','pressure-actor lead')+actor(716,342,'#5f8877','#b78a6d','employee','listener')+
-  '<g class="prop" transform="translate(480 365)"><rect x="-79" y="-60" width="158" height="120" rx="6" fill="#f1ebd7"/><path d="M-55-29H55M-55-5H47M-55 20H25" stroke="#9dad99" stroke-width="7" stroke-linecap="round"/></g>'+
+  '<g transform="translate(480 365)"><g class="prop"><rect x="-79" y="-60" width="158" height="120" rx="6" fill="#f1ebd7"/><path d="M-55-29H55M-55-5H47M-55 20H25" stroke="#9dad99" stroke-width="7" stroke-linecap="round"/></g></g>'+
   textBubble('The boss says','“Blame someone else.”');
  }
  const symbols=['A conversation changes','The record changes','The decision changes','The account changes'];

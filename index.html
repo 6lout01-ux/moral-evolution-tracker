@@ -72,6 +72,80 @@
 @keyframes film-caption{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:700px){.film-header{padding:12px}.film-visual{aspect-ratio:4/5;min-height:350px}.film-hud{left:12px;top:13px}.film-caption{bottom:24px}.film-options{grid-template-columns:1fr}.film-option{min-height:0;flex-direction:row;align-items:baseline}.film-decision,.film-bottom,.film-ending{padding:16px}.film-list{grid-template-columns:repeat(2,1fr)}}
 @media(prefers-reduced-motion:reduce){.film-camera,.film-camera .character,.film-camera .walk-in,.film-camera .light-float,.film-camera .paper-float,.film-camera .talk,.film-visual.consequence .film-camera,.film-caption{animation:none!important}.film-option{transition:none}}
+
+/* Directed, one-shot animated interactions. Each story progresses to a stop. */
+.film-camera,.film-camera .character,.film-camera .walk-in,.film-camera .light-float,.film-camera .paper-float,.film-camera .talk,
+.film-visual.consequence .film-camera{animation:none!important;transform:none!important}
+.film-visual{background:#18332e;overflow:hidden}
+.film-visual .film-camera{inset:0;transform:none!important;filter:none!important}
+.film-visual .film-camera svg{display:block;height:100%;width:100%;overflow:hidden}
+.film-visual.pressure .film-camera{filter:none!important}
+.scene-svg .person,.scene-svg .prop,.scene-svg .arm,.scene-svg .head,.scene-svg .eye,.scene-svg .fold,.scene-svg .gesture{transform-box:fill-box}
+.scene-svg .person,.scene-svg .prop,.scene-svg .arm,.scene-svg .gesture,.scene-svg .scene-glow{animation-iteration-count:1!important;animation-fill-mode:both!important}
+.scene-svg .person{transform-origin:center center}
+.scene-svg .arm{transform-origin:center 10%;stroke-linecap:round}
+.scene-svg .person .mouth{stroke:#744936;stroke-width:2;fill:none;stroke-linecap:round}
+.scene-svg .scene-glow{animation:none}
+.film-visual.mopening .scene-svg .lead{animation:walk-in-story 2.4s cubic-bezier(.18,.68,.29,1) both!important}
+.film-visual.mopening .scene-svg .prop{animation:prop-arrive 2.2s ease-out both!important}
+.film-visual.mopening .scene-svg .arm-right{animation:reach-story 1.8s .5s ease-out both!important}
+.film-visual.mconflict .scene-svg .pressure-actor{animation:press-in 2.2s ease-out both!important}
+.film-visual.mconflict .scene-svg .arm-right{animation:point-story 1.8s .35s ease-out both!important}
+.film-visual.mconflict .scene-svg .prop{animation:prop-question 2s .3s ease-out both!important}
+.film-visual.mconflict .scene-svg .listener{animation:react-story 1.8s .5s ease-out both!important}
+.film-visual.mdecision .scene-svg .listener{animation:decision-suspense .8s ease-out both!important}
+.film-visual.mending.choice0 .scene-svg .lead{animation:approach-story 2.3s ease-in-out both!important}
+.film-visual.mending.choice0 .scene-svg .listener{animation:meet-story 2.3s ease-in-out both!important}
+.film-visual.mending.choice0 .scene-svg .arm-right{animation:wave-story 2.1s .15s ease-in-out both!important}
+.film-visual.mending.choice0 .scene-svg .prop{animation:hand-over-story 2s ease-in-out both!important}
+.film-visual.mending.choice1 .scene-svg .lead{animation:cautious-story 2.4s ease-out both!important}
+.film-visual.mending.choice1 .scene-svg .listener{animation:acknowledge-story 2.2s ease-out both!important}
+.film-visual.mending.choice1 .scene-svg .prop{animation:prop-return-story 2.2s ease-out both!important}
+.film-visual.mending.choice2 .scene-svg .lead{animation:turn-away-story 2.4s ease-in both!important}
+.film-visual.mending.choice2 .scene-svg .listener{animation:withdraw-story 2.5s ease-in both!important}
+.film-visual.mending.choice2 .scene-svg .prop{animation:prop-taken-story 2.2s ease-out both!important}
+.film-visual.mending.choice2 .scene-svg .arm-right{animation:dismiss-story 1.6s ease-in both!important}
+.film-visual.mending .scene-svg .final-signal{animation:signal-arrive 1.5s 1.2s ease-out both!important}
+.film-visual:not(.mending) .scene-svg .final-signal{opacity:0}
+.film-visual.mopening .scene-svg .dialog-bubble{animation:bubble-shot 1.1s 1.5s ease-out both!important}
+.film-visual.mconflict .scene-svg .dialog-bubble{animation:bubble-shot .8s .4s ease-out both!important}
+.film-visual.mdecision .scene-svg .dialog-bubble{opacity:1}
+.film-visual.mending .scene-svg .dialog-bubble{animation:bubble-leave .55s ease-in both!important}
+.film-visual .scene-svg .scene-still{opacity:1}
+.film-visual.mopening .film-caption,.film-visual.mconflict .film-caption,
+.film-visual.mdecision .film-caption,.film-visual.mending .film-caption{animation:film-caption .45s ease-out 1 both}
+.film-visual.mending .film-camera{animation:story-end-color 1.3s ease-out 1 both!important}
+.film-visual.mending.choice0 .film-camera{--ending-tint:#a4bda0}
+.film-visual.mending.choice1 .film-camera{--ending-tint:#dcc29a}
+.film-visual.mending.choice2 .film-camera{--ending-tint:#ad7765}
+.film-visual.mconflict.pressure .film-pressure-shade{box-shadow:inset 0 0 140px 35px rgba(159,72,54,.34)}
+.film-options{gap:10px}
+.film-ending h3{font-size:24px}
+.film-ending .film-story-ended{font-weight:700;letter-spacing:.8px;font-size:11px;text-transform:uppercase;color:#5d7b67}
+@keyframes walk-in-story{0%{transform:translate(105px,9px);opacity:0}55%{opacity:1}75%{transform:translate(16px,-2px)}100%{transform:translate(0,0)}}
+@keyframes prop-arrive{0%{opacity:0;transform:translate(-80px,0) rotate(-11deg)}55%{opacity:1}100%{opacity:1;transform:translate(0,0) rotate(0)}}
+@keyframes reach-story{0%,30%{transform:rotate(0)}70%{transform:rotate(-31deg)}100%{transform:rotate(-17deg)}}
+@keyframes press-in{0%{transform:translate(-30px,0)}70%{transform:translate(4px,0)}100%{transform:translate(0,0)}}
+@keyframes point-story{0%{transform:rotate(0)}32%{transform:rotate(-60deg)}68%{transform:rotate(-48deg)}100%{transform:rotate(-36deg)}}
+@keyframes prop-question{0%{transform:translate(0,0)}60%{transform:translate(43px,0) rotate(3deg)}100%{transform:translate(40px,0)}}
+@keyframes react-story{0%{transform:translate(0,0) rotate(0)}48%{transform:translate(-7px,5px) rotate(-2deg)}100%{transform:translate(-4px,7px) rotate(-1deg)}}
+@keyframes decision-suspense{0%{transform:translate(-4px,7px)}100%{transform:translate(0,0)}}
+@keyframes approach-story{0%{transform:translate(0,0)}45%{transform:translate(54px,0)}80%{transform:translate(85px,-2px)}100%{transform:translate(100px,0)}}
+@keyframes meet-story{0%{transform:translate(0,0)}65%{transform:translate(-65px,0)}100%{transform:translate(-88px,0)}}
+@keyframes wave-story{0%{transform:rotate(0)}45%{transform:rotate(-62deg)}67%{transform:rotate(-48deg)}100%{transform:rotate(-25deg)}}
+@keyframes hand-over-story{0%{transform:translate(0,0)}36%{transform:translate(-28px,-7px) rotate(-4deg)}100%{transform:translate(95px,-2px) rotate(2deg)}}
+@keyframes cautious-story{0%{transform:translate(0,0)}55%{transform:translate(38px,-4px)}100%{transform:translate(52px,0)}}
+@keyframes acknowledge-story{0%{transform:rotate(0) translate(0,0)}55%{transform:rotate(2deg) translate(-8px,1px)}100%{transform:rotate(0) translate(-19px,0)}}
+@keyframes prop-return-story{0%{transform:translate(0,0)}100%{transform:translate(-45px,3px)}}
+@keyframes turn-away-story{0%{transform:translate(0,0) scaleX(1)}35%{transform:translate(4px,0) scaleX(-1)}100%{transform:translate(-74px,0) scaleX(-1)}}
+@keyframes withdraw-story{0%{transform:translate(0,0)}50%{transform:translate(25px,0)}100%{transform:translate(122px,0)}}
+@keyframes prop-taken-story{0%{transform:translate(0,0)}100%{transform:translate(-145px,-17px) rotate(-12deg)}}
+@keyframes dismiss-story{0%{transform:rotate(0)}50%{transform:rotate(37deg)}100%{transform:rotate(-10deg)}}
+@keyframes signal-arrive{0%{opacity:0;transform:translateY(14px) scale(.9)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes bubble-shot{0%{opacity:0;transform:translateY(12px) scale(.9)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes bubble-leave{0%{opacity:1}100%{opacity:0}}
+@keyframes story-end-color{0%{filter:saturate(.67) brightness(.8)}100%{filter:saturate(1.13) brightness(1.05)}}
+@media(prefers-reduced-motion:reduce){.film-visual .scene-svg *,.film-visual .film-camera,.film-visual .film-caption{animation-duration:.01ms!important;animation-delay:0ms!important}}
 </style>
 </head>
 <body>
@@ -127,33 +201,53 @@ const filmDialog=[
  ['The committee is preparing to vote.','Two candidates are qualified, but one is more familiar.'],
  ['A meeting is about to start.','Your supervisor is asking you to blame somebody else.']
 ];
-function figure(x,y,coat,skin,mode){
- const klass=mode||'character';
- return '<g class="'+klass+'" transform="translate('+x+' '+y+')"><ellipse cx="0" cy="88" rx="44" ry="8" fill="#081c19" opacity=".26"/><path d="M-17 37L-21 83M16 37L20 83" fill="none" stroke="#293d39" stroke-width="14" stroke-linecap="round"/><path d="M-24 12Q-30-6 -14-9L12-9Q29-3 25 17L18 47H-18Z" fill="'+coat+'"/><path d="M-22 3l-16 30M21 3l19 25" fill="none" stroke="'+coat+'" stroke-width="11" stroke-linecap="round"/><rect x="-7" y="-20" width="14" height="17" rx="5" fill="'+skin+'"/><ellipse cx="0" cy="-38" rx="19" ry="23" fill="'+skin+'"/><path d="M-20-42Q-21-67 2-64Q23-64 20-40L13-49Q-8-41-20-42Z" fill="#26322e"/><circle cx="-6" cy="-36" r="1.8" fill="#2c312e"/><circle cx="7" cy="-36" r="1.8" fill="#2c312e"/></g>';
+
+function actor(x,y,coat,skin,id,role){
+ return '<g class="person '+role+'" id="'+id+'" transform="translate('+x+' '+y+')">'+
+ '<ellipse cx="0" cy="89" rx="34" ry="8" fill="#11231d" opacity=".29"/>'+
+ '<g class="leg"><path d="M-12 41L-15 79M12 41L14 79" stroke="#35463e" stroke-width="13" stroke-linecap="round"/></g>'+
+ '<path d="M-23 8Q-19-9 0-7Q23-9 25 9L20 46H-20Z" fill="'+coat+'"/>'+
+ '<g class="arm arm-left"><path d="M-20 7Q-36 20-31 42" stroke="'+coat+'" stroke-width="12" fill="none" stroke-linecap="round"/><circle cx="-31" cy="42" r="6" fill="'+skin+'"/></g>'+
+ '<g class="arm arm-right"><path d="M19 7Q34 21 34 40" stroke="'+coat+'" stroke-width="12" fill="none" stroke-linecap="round"/><circle cx="34" cy="40" r="6" fill="'+skin+'"/></g>'+
+ '<rect x="-8" y="-21" width="16" height="16" rx="4" fill="'+skin+'"/>'+
+ '<g class="head"><ellipse cx="0" cy="-40" rx="20" ry="24" fill="'+skin+'"/>'+
+ '<path d="M-20-41Q-25-67 0-68Q25-66 21-40Q10-53-1-50Q-11-44-20-41Z" fill="#2e302a"/>'+
+ '<circle cx="-7" cy="-38" r="2" fill="#28312b"/><circle cx="7" cy="-38" r="2" fill="#28312b"/>'+
+ '<path class="mouth" d="M-4 -27Q0 -25 4 -27"/></g></g>';
 }
-function filmArt(i){
- const name=['the group','the desk','the meeting room','the office'][i];
- let art='<svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated illustration of '+name+'"><defs><linearGradient id="bk" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#506d60"/><stop offset="1" stop-color="#173a34"/></linearGradient><linearGradient id="pane" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d9d6ba"/><stop offset="1" stop-color="#799c8f"/></linearGradient></defs><rect width="960" height="540" fill="url(#bk)"/>';
+function storyStage(i){
+ const backgrounds=[
+  '<rect width="960" height="540" fill="#708e7f"/><rect x="0" y="295" width="960" height="245" fill="#617668"/><rect x="80" y="70" width="625" height="250" rx="10" fill="#c4cab4"/><rect x="105" y="96" width="174" height="202" fill="#657d70"/><rect x="302" y="96" width="158" height="202" fill="#657d70"/><rect x="488" y="96" width="191" height="202" fill="#657d70"/><path d="M0 428H960" stroke="#c0c7b2" stroke-width="4"/><circle cx="790" cy="118" r="68" fill="#f1db9d" opacity=".43"/>',
+  '<rect width="960" height="540" fill="#426b5e"/><rect x="0" y="408" width="960" height="132" fill="#3a4e43"/><rect x="65" y="57" width="385" height="253" fill="#a5b8a1"/><path d="M257 57V310M65 188H450" stroke="#4b7060" stroke-width="13"/><rect x="105" y="375" width="740" height="25" rx="5" fill="#ae9473"/><rect x="145" y="396" width="16" height="109" fill="#725e4b"/><rect x="803" y="396" width="16" height="109" fill="#725e4b"/><rect x="564" y="75" width="300" height="177" rx="6" fill="#294b41"/>',
+  '<rect width="960" height="540" fill="#536f64"/><rect x="0" y="399" width="960" height="141" fill="#31463c"/><rect x="70" y="59" width="315" height="241" fill="#a8bcae"/><path d="M230 59V300" stroke="#416455" stroke-width="12"/><rect x="560" y="70" width="308" height="214" rx="9" fill="#b8c1ae"/><ellipse cx="478" cy="403" rx="357" ry="80" fill="#bc9d78"/><path d="M155 437Q480 510 802 437" stroke="#806a55" stroke-width="20" fill="none"/>',
+  '<rect width="960" height="540" fill="#4b6a5e"/><rect x="0" y="405" width="960" height="135" fill="#374e43"/><rect x="64" y="62" width="342" height="249" fill="#b9c9b3"/><path d="M238 62V311M64 187H406" stroke="#476a5a" stroke-width="12"/><rect x="530" y="72" width="335" height="236" rx="5" fill="#aebda9"/><rect x="115" y="387" width="731" height="23" rx="5" fill="#9c8163"/><rect x="160" y="410" width="20" height="104" fill="#725b47"/><rect x="800" y="410" width="20" height="104" fill="#725b47"/>'
+ ];
+ let visual=backgrounds[i];
+ const textBubble=(title,line)=>'<g class="dialog-bubble"><path d="M531 133H827Q842 133 842 148V216Q842 230 827 230H610L585 253V230H531Q517 230 517 216V148Q517 133 531 133Z" fill="#f8f1d9" opacity=".95"/><text x="541" y="157" font-size="16" font-weight="bold" fill="#395e4a">'+title+'</text><text x="541" y="188" font-size="18" fill="#2b483b">'+line+'</text></g>';
  if(i===0){
-  art+='<rect x="0" y="0" width="960" height="335" fill="#87a79a"/><path d="M0 285Q180 210 335 280T670 260T960 300V540H0Z" fill="#547664"/><rect x="50" y="60" width="560" height="262" rx="9" fill="#c8cfb8"/><rect x="81" y="88" width="140" height="204" fill="#617c71"/><rect x="250" y="88" width="135" height="204" fill="#617c71"/><rect x="410" y="88" width="168" height="204" fill="#617c71"/><path d="M0 398H960V540H0Z" fill="#777f71"/><path d="M0 440H960" stroke="#d0c7a3" stroke-width="3"/><circle class="light-float" cx="780" cy="115" r="68" fill="#f9e7a2" opacity=".38"/>';
-  art+=figure(235,352,'#b98565','#c28c66')+figure(360,338,'#37594a','#d7b09a')+figure(470,354,'#e3c591','#aa775a')+figure(755,350,'#527e72','#ba896a','walk-in');
-  art+='<path d="M245 245Q310 220 355 242" stroke="#f4edcf" stroke-width="3" fill="none" stroke-dasharray="8 8" opacity=".6"/>';
- } else if(i===1){
-  art+='<rect x="80" y="35" width="800" height="340" rx="9" fill="#3f5d52"/><rect x="115" y="62" width="330" height="227" fill="url(#pane)"/><path d="M275 62V289 M115 177H445" stroke="#48685d" stroke-width="12"/><circle class="light-float" cx="320" cy="118" r="70" fill="#f7e2ae" opacity=".36"/><rect x="0" y="420" width="960" height="120" fill="#404f46"/><rect x="175" y="348" width="610" height="35" rx="7" fill="#b69a76"/><rect x="205" y="378" width="24" height="120" fill="#705f4b"/><rect x="735" y="378" width="24" height="120" fill="#705f4b"/>';
-  art+='<g class="paper-float"><rect x="315" y="301" width="205" height="46" rx="5" fill="#f4eedc" transform="rotate(-5 315 301)"/><path d="M340 314H464M340 325H445" stroke="#aeaf9f" stroke-width="4"/></g><rect x="540" y="277" width="128" height="70" rx="4" fill="#34443e"/><path d="M540 341H682" stroke="#d3c6a5" stroke-width="8"/>';
-  art+=figure(205,330,'#5c7b70','#c48e71','walk-in')+figure(772,332,'#b17b5d','#d0a17f');
- } else if(i===2){
-  art+='<rect x="0" y="0" width="960" height="347" fill="#577567"/><rect x="75" y="58" width="330" height="225" fill="url(#pane)"/><path d="M240 58V283" stroke="#47695c" stroke-width="12"/><rect x="550" y="69" width="308" height="187" rx="9" fill="#314e43"/><rect x="575" y="92" width="258" height="142" fill="#d7d5bd"/><rect x="0" y="418" width="960" height="122" fill="#283e37"/><ellipse cx="470" cy="408" rx="380" ry="71" fill="#b29875"/><path d="M128 418Q470 532 817 418" fill="none" stroke="#6e5d47" stroke-width="28"/>';
-  art+=figure(210,355,'#627e70','#c38f6c')+figure(380,350,'#96765d','#d6ae91')+figure(685,350,'#355e52','#b98c75','walk-in');
-  art+='<g class="paper-float"><rect x="385" y="388" width="94" height="35" rx="3" fill="#f3eddb"/><rect x="525" y="385" width="94" height="35" rx="3" fill="#f3eddb"/><path d="M397 403H459M537 403H598" stroke="#728d7f" stroke-width="3"/></g>';
- } else {
-  art+='<rect x="0" y="0" width="960" height="344" fill="#4c695e"/><rect x="60" y="52" width="355" height="240" fill="url(#pane)"/><path d="M235 52V292 M60 170H415" stroke="#456a5b" stroke-width="11"/><rect x="500" y="70" width="380" height="230" rx="5" fill="#d0d1bd"/><rect x="515" y="87" width="350" height="24" fill="#abc0af"/><rect x="0" y="421" width="960" height="119" fill="#48584e"/><rect x="120" y="352" width="730" height="26" rx="8" fill="#96795a"/>';
-  art+=figure(270,339,'#ab7d63','#d4a182')+figure(700,348,'#547b6b','#bc896b','walk-in');
-  art+='<g class="talk"><rect x="430" y="230" width="122" height="72" rx="8" fill="#e5e0cd" opacity=".85"/><path d="M451 250H531M451 266H516" stroke="#819b8a" stroke-width="5"/></g>';
+  visual+=actor(250,350,'#a7775e','#b8826d','groupA','pressure-actor')+actor(360,348,'#456c56','#d09e80','groupB','lead')+
+  actor(476,355,'#dbb889','#a97661','groupC','pressure-actor')+actor(765,354,'#628c7b','#bf977c','outsider','listener')+
+  '<g class="prop" transform="translate(414 258)"><rect x="-54" y="-22" width="108" height="44" rx="8" fill="#efe6d2"/><text x="0" y="6" fill="#4b705e" text-anchor="middle" font-size="20" font-weight="bold">PLANS</text></g>'+
+  textBubble('A friend says','“We already made plans.”');
+ }else if(i===1){
+  visual+=actor(260,335,'#547b6f','#b9876f','owner','listener')+actor(738,337,'#b47a56','#d8a98a','colleague','pressure-actor lead')+
+  '<g class="prop" transform="translate(506 355)"><rect x="-100" y="-43" width="200" height="86" rx="8" fill="#f4ecd5" stroke="#d4c5a8" stroke-width="4"/><path d="M-75-16H70M-75 0H63M-75 16H35" stroke="#97aa99" stroke-width="6" stroke-linecap="round"/></g>'+
+  textBubble('The organizer says','“Credit is up for grabs.”');
+ }else if(i===2){
+  visual+=actor(258,322,'#688e78','#c38e72','reviewer','lead')+actor(723,323,'#b48b69','#d0a486','chair','pressure-actor listener')+
+  '<g class="prop" transform="translate(488 373)"><rect x="-112" y="-31" width="100" height="70" rx="6" fill="#f3e9cb" stroke="#cabd9a" stroke-width="3"/><rect x="12" y="-31" width="100" height="70" rx="6" fill="#efe8d9" stroke="#c8bfa5" stroke-width="3"/><text x="-61" y="11" text-anchor="middle" font-size="22" fill="#466657">A</text><text x="61" y="11" text-anchor="middle" font-size="22" fill="#466657">B</text></g>'+
+  textBubble('The chair says','“We know candidate A.”');
+ }else{
+  visual+=actor(250,339,'#aa7659','#cd997c','boss','pressure-actor lead')+actor(716,342,'#5f8877','#b78a6d','employee','listener')+
+  '<g class="prop" transform="translate(480 365)"><rect x="-79" y="-60" width="158" height="120" rx="6" fill="#f1ebd7"/><path d="M-55-29H55M-55-5H47M-55 20H25" stroke="#9dad99" stroke-width="7" stroke-linecap="round"/></g>'+
+  textBubble('The boss says','“Blame someone else.”');
  }
- art+='<g opacity=".10"><path d="M0 0L240 0L-20 540M960 0L710 0L980 540" fill="#e8deb4"/></g></svg>';
- return art;
+ const symbols=['A conversation changes','The record changes','The decision changes','The account changes'];
+ visual+='<g class="final-signal"><rect x="315" y="123" width="330" height="55" rx="12" fill="#f5efda" opacity=".93"/><text x="480" y="160" text-anchor="middle" fill="#2c5c48" font-family="Georgia,serif" font-size="23">'+symbols[i]+'</text></g>';
+ return '<svg class="scene-svg" viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated scene with interacting characters">'+visual+'</svg>';
 }
+function filmArt(i){return storyStage(i);}
+
 function filmStatus(i){
  const r=filmRecords[i]||{};
  const a=Number.isInteger(r.base),b=Number.isInteger(r.pressure);
@@ -185,10 +279,10 @@ function paintFilm(){
   const compare=Number.isInteger(rec.base)&&Number.isInteger(rec.pressure)?'<p class="reflection"><strong>Compare your decisions:</strong> '+esc(p.labels[rec.base])+' (everyday) / '+esc(p.labels[rec.pressure])+' (under pressure). '+(rec.base===rec.pressure?'Your choice remained consistent.':'Your choice changed when the circumstances changed.')+'</p>':'';
   result='<div class="film-ending"><div class="mini-kicker">Your decision, '+(film.pressure?'under pressure':'without added pressure')+'</div><h3>'+esc(p.labels[film.selected])+'</h3><p>'+esc(p.feedback[film.selected])+'</p>'+compare+'<div class="actions"><button class="primary" data-film="toggle">'+(film.pressure?'Try the everyday version':'Replay with added pressure')+'</button><button class="secondary" data-film="next">Next scene</button></div></div>';
  }
- filmRoot.innerHTML='<div class="film-shell"><div class="film-header"><strong>Moments / An interactive film</strong><span>'+esc(p.name)+'</span></div><div class="film-visual '+(film.pressure?'pressure ':'')+(end?'consequence':'')+'"><div class="film-camera">'+filmArt(film.scene)+'</div><div class="film-pressure-shade"></div>'+hud+captions+playback+'</div>'+toolbar+'</div>'+result+'<div class="film-list" aria-label="Choose a story">'+pictures.map(function(x,i){return '<button class="film-thumb '+(film.scene===i?'active':'')+'" data-film="scene" data-index="'+i+'"><b>STORY 0'+(i+1)+'</b><span>'+esc(x.name)+'</span><small>'+filmStatus(i)+'</small></button>';}).join('')+'</div><p class="film-instruction">Animated scenes are illustrations, not recorded footage. You can pause, skip, replay, and try both conditions.</p>';
+ filmRoot.innerHTML='<div class="film-shell"><div class="film-header"><strong>Moments / An interactive film</strong><span>'+esc(p.name)+'</span></div><div class="film-visual '+(film.pressure?'pressure ':'')+(preview?'mpreview':film.beat===0?'mopening':film.beat===1?'mconflict':film.beat===2?'mdecision':'mending')+(end?' choice'+film.selected:'')+'"><div class="film-camera">'+filmArt(film.scene)+'</div><div class="film-pressure-shade"></div>'+hud+captions+playback+'</div>'+toolbar+'</div>'+result+'<div class="film-list" aria-label="Choose a story">'+pictures.map(function(x,i){return '<button class="film-thumb '+(film.scene===i?'active':'')+'" data-film="scene" data-index="'+i+'"><b>STORY 0'+(i+1)+'</b><span>'+esc(x.name)+'</span><small>'+filmStatus(i)+'</small></button>';}).join('')+'</div><p class="film-instruction">Watch characters interact in each one-time scene. Choose an ending, then replay with added pressure. Every story stops at the decision.</p>';
 }
 function stopFilm(){if(filmTimer!==null){clearTimeout(filmTimer);filmTimer=null;}}
-function scheduleFilm(){stopFilm();if(!film.paused&&film.beat>=0&&film.beat<2){filmTimer=setTimeout(function(){film.beat+=1;paintFilm();scheduleFilm();},3300);}}
+function scheduleFilm(){stopFilm();if(!film.paused&&film.beat>=0&&film.beat<2){filmTimer=setTimeout(function(){film.beat+=1;paintFilm();scheduleFilm();},3700);}}
 function resetFilm(scene,pressure,auto){stopFilm();film={scene:scene,pressure:pressure,beat:auto?0:-1,paused:false,selected:null};paintFilm();if(auto)scheduleFilm();}
 filmRoot.addEventListener('click',function(ev){
  const btn=ev.target.closest('button[data-film]');if(!btn)return;

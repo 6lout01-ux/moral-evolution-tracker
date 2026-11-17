@@ -304,7 +304,7 @@ filmRoot.addEventListener('click',function(ev){
  const btn=ev.target.closest('button[data-film]');if(!btn)return;
  const action=btn.dataset.film;
  if(action==='scene'){resetFilm(Number(btn.dataset.index),false,false);return;}
- if(action==='next'){resetFilm((film.scene+1)%pictures.length,false,false);return;}
+ if(action==='next'){if(visualCompleted()===8){renderQuiz();document.getElementById('quizArea').scrollIntoView({behavior:'smooth',block:'start'});return;}const r=filmRecords[film.scene]||{};if(!Number.isInteger(r.base)){resetFilm(film.scene,false,false);return;}if(!Number.isInteger(r.pressure)){resetFilm(film.scene,true,false);return;}for(let n=1;n<=pictures.length;n++){const id=(film.scene+n)%pictures.length,t=filmRecords[id]||{};if(!Number.isInteger(t.base)||!Number.isInteger(t.pressure)){resetFilm(id,Number.isInteger(t.base),false);return;}}return;}
  if(action==='toggle'){resetFilm(film.scene,!film.pressure,false);return;}
  if(action==='replay'){resetFilm(film.scene,film.pressure,true);return;}
  if(action==='play'){film.beat=0;film.paused=false;paintFilm();scheduleFilm();return;}
@@ -365,8 +365,8 @@ function drawGraph(){let pts=graphData();if(!pts.length)return'<p class="muted">
 function renderTimeline(){document.getElementById('graphArea').innerHTML=drawGraph();let list=document.getElementById('entryList');list.innerHTML=state.entries.length?state.entries.slice().reverse().map((e)=>`<div class="entry"><time>${esc(e.date)}</time><div class="tag">${esc(e.kind)} · ${e.rating}/100</div><p>${esc(e.text)}</p></div>`).join(''):'<p class="muted">No check-ins yet. Add an observation above to start a record.</p>'}
 const dateInput=document.getElementById('entryDate');dateInput.value=new Date().toLocaleDateString('en-CA');document.getElementById('saveEntry').onclick=()=>{const date=dateInput.value,kind=document.getElementById('entryKind').value,text=document.getElementById('entryText').value.trim(),rating=Number(document.getElementById('entryRating').value);if(!date||!text){document.getElementById('entryFeedback').textContent='Add a date and a short description to save.';return}state.entries.push({date,kind,text,rating});save();document.getElementById('entryText').value='';document.getElementById('entryFeedback').textContent='Check-in saved in this browser.';renderTimeline()};
 document.getElementById('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({app:'Moral Evolution Tracker',version:1,exportedAt:new Date().toISOString(),...state},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='moral-evolution-tracker-data.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)};
-document.getElementById('resetBtn').onclick=()=>{if(!confirm('Delete all assessment answers and check-ins saved in this browser?'))return;state={answers:{},entries:[]};save();current=0;renderTimeline();renderOverview()};
-document.getElementById('weightsArea').innerHTML=categories.map(c=>`<div class="category"><div class="catrow"><span>${esc(c.name)}</span><strong>${c.weight}%</strong></div><div class="bar"><div style="width:${c.weight*4}%"></div></div></div>`).join('');renderOverview();
+document.getElementById('resetBtn').onclick=()=>{if(!confirm('Delete all assessment answers and check-ins saved in this browser?'))return;state={answers:{},visual:{},entries:[]};filmRecords=state.visual;save();current=0;resetFilm(0,false,false);renderVisualStatus();renderTimeline();renderQuiz();renderOverview()};
+document.getElementById('weightsArea').innerHTML=categories.map(c=>`<div class="category"><div class="catrow"><span>${esc(c.name)}</span><strong>${c.weight}%</strong></div><div class="bar"><div style="width:${c.weight*4}%"></div></div></div>`).join('');renderOverview();renderVisualStatus();renderQuiz();
 })();
 </script>
 </body></html>
